@@ -41,10 +41,11 @@ p {
 }
 input {
     padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
     box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 2px;
     flex-grow: 1;
     box-shadow: 4px 4px 4px black;
 }
