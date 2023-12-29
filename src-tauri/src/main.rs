@@ -1,20 +1,17 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
+mod auth;
 
 #[tauri::command]
 fn signin(username: &str, password: &str) -> bool {
-    return username == "user@email.com" && password == "123";
+    return auth::is_valid_user(username, password);
 }
 
 fn main() {
+    auth::initialize();
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet, signin])
+        .invoke_handler(tauri::generate_handler![signin])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

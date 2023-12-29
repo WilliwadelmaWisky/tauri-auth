@@ -21,11 +21,11 @@ function submit() {
     <form name="signin-form" @submit.prevent="submit">
         <p>
             <label for="email-input">Email</label>
-            <input type="email" name="email-input" placeholder="example@email.com" v-model="username"/>
+            <input type="email" name="email-input" placeholder="example@email.com" v-model="username" required/>
         </p>
         <p>
             <label for="password-input">Password</label>
-            <input type="password" name="password-input" placeholder="Enter password..." v-model="password"/>
+            <input type="password" name="password-input" placeholder="Enter password..." v-model="password" required/>
         </p>
         <p>
             <input type="submit" value="Sign In"/>
