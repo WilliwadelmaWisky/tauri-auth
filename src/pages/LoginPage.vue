@@ -15,12 +15,19 @@ async function login(username: string, password: string) {
     await router.push("/user");
 }
 
+async function signup() {
+    await router.push("/new");
+}
+
 </script>
 
 <template>
     <div>
         <h1>Login</h1>
-        <LoginForm v-on:submit="login"/>
+        <LoginForm 
+            v-on:submit="login"
+            v-on:signup="signup"
+        />
     </div>  
 </template>
 
@@ -31,8 +38,8 @@ async function login(username: string, password: string) {
         width: 50%;
         align-items: center;
         margin: auto;
-        background-color: darkgray;
-        border: 2px solid aquamarine;
+        background-color: #ddd;
+        border: 2px solid rgb(30, 30, 30);
         border-radius: 1em;
         box-shadow: 10px 10px 1em black;
     }

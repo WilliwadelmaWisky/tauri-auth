@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 const props = defineProps<{
     onSubmit: (username: string, password: string) => void
+    onSignup: () => void
 }>();
 
 const username = ref("");
@@ -15,41 +16,58 @@ function submit() {
     props.onSubmit(username.value, password.value);
 }
 
+function signup() {
+    props.onSignup();
+}
 </script>
 
 <template>
     <form name="signin-form" @submit.prevent="submit">
-        <p>
-            <label for="email-input">Email</label>
-            <input type="email" name="email-input" placeholder="example@email.com" v-model="username" required/>
-        </p>
-        <p>
-            <label for="password-input">Password</label>
-            <input type="password" name="password-input" placeholder="Enter password..." v-model="password" required/>
-        </p>
-        <p>
-            <input type="submit" value="Sign In"/>
-        </p>
+        <input type="email" placeholder="Email" v-model="username" required/>
+        <input type="password" placeholder="Password" v-model="password" required/>
+        <input type="submit" value="Login"/>
     </form>
+    <div>
+        <p>Not a member?</p>
+        <button v-on:click="signup">Sign up</button>
+    </div>
 </template>
 
 <style scoped>
-p {
+form {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
 }
 input {
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     box-sizing: border-box;
-    border: 1px solid #ccc;
     border-radius: 2px;
-    flex-grow: 1;
     box-shadow: 4px 4px 4px black;
 }
-label {
-    width: 6em;
+input[type=email], input[type=password] {
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+input[type=submit] {
+    background-color: rgb(40, 180, 20);
+    border: 1px solid rgb(40, 160, 20);
+}
+div {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+div p {
+    font-size: 12px;
+}
+div button {
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
 }
 </style>

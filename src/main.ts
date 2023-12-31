@@ -1,13 +1,15 @@
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
-import "./styles.css";
+import "./main.css";
 import App from "./App.vue";
-import LoginRoute from "./pages/LoginRoute.vue";
-import UserRoute from "./pages/UserRoute.vue";
+import LoginPage from "./pages/LoginPage.vue";
+import SignupPage from "./pages/SignupPage.vue";
+import UserPage from "./pages/UserPage.vue";
 
 const routes = [
-    { path: '/', component: LoginRoute },
-    { path: '/user', component: UserRoute }
+    { path: '/', component: LoginPage },
+    { path: '/user', component: UserPage },
+    { path: '/new', component: SignupPage }
 ]
 
 const router = createRouter({
