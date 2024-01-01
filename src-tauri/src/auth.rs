@@ -1,6 +1,14 @@
 use std::collections::HashMap;
 
 static mut USER_MAP: Option<HashMap<String, String>> = None;
+static mut AUTHENTICATED_USER: Option<String> = None;
+
+#[derive(serde::Serialize)]
+pub struct AuthInfo {
+    is_authenticated: bool,
+    user: String
+}
+
 
 /// Initialize authentication
 pub fn initialize() {
@@ -10,6 +18,42 @@ pub fn initialize() {
 
     add_user("user1@email.com", "123");
     add_user("user2@email.com", "456");
+}
+
+/// Authenticate
+pub fn authenticate(username: &str) -> bool {
+    unsafe {
+        match &mut AUTHENTICATED_USER {
+            Some(..) => return false,
+            None => { 
+                AUTHENTICATED_USER = Some(username.to_string());
+                return true;
+            }
+        }
+    }
+}
+
+/// Logout
+pub fn logout() {
+    unsafe {
+        match &mut AUTHENTICATED_USER {
+            Some(..) => {
+                AUTHENTICATED_USER = None;
+                return;
+            }
+            None => return
+        }
+    }
+}
+
+/// 
+pub fn is_authenticated() -> AuthInfo {
+    unsafe {
+        match &AUTHENTICATED_USER {
+            Some(username) => return AuthInfo { is_authenticated: true, user: username.to_string() },
+            None => return AuthInfo { is_authenticated: false, user: "".to_string() }
+        }
+    }
 }
 
 

@@ -6,13 +6,12 @@ import { invoke } from "@tauri-apps/api";
 const router = useRouter();
 
 async function login(username: string, password: string) {
-    const success = await invoke("signin", { username: username, password: password });
+    const success: boolean = await invoke("login", { username: username, password: password });
     if (!success) {
-        alert("Wrong username or password! Please try again.")
         return;
     }
 
-    await router.push("/user");
+    await router.push("/");
 }
 
 async function signup() {

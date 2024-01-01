@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
+import { invoke } from "@tauri-apps/api";
 import SignupForm from "../components/SignupForm.vue";
 
 const router = useRouter();
 
-async function signup() {
+async function signup(username: string, password: string) {
+    const success: boolean = await invoke("signup", { username: username, password: password });
+    if (!success) {
+        return;
+    }
+    
     await router.push("/user");
 }
 
